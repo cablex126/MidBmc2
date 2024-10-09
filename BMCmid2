@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+class Counter extends StatelessWidget {
+
+  const Counter({super.key});
+
+}
+
+
+class _CounterState extends StatelessWidget {
+  int _counter = 0;
+
+  void _increment() {
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector( 
+      onTap: () {
+         print("My Button was Tapped");
+      }, 
+        ElevatedButton(
+          onPressed: _increment,
+          child: const Text('Increment'),
+        ),
+        const SizedBox(width: 16),
+        Text('Count: $_counter'),
+      ],
+    );
+  }
+}
+
+void main() {
+  runApp(
+    const MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Counter(),
+        ),
+      ),
+    ),
+  );
+}
+
+
