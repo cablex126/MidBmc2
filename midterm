@@ -1,0 +1,77 @@
+// Importing the Flutter Material package
+import 'package: flutter/material.dart';
+
+// Defining a stateless widget Counter
+class Counter extends StatelessWidget {
+  // Declaring final variables: count (an integer) and onIncrement (a callback function).
+  final int count;
+  final VoidCallback onIncrement;
+
+  // Constructor for Counter the count and onIncrement variables.
+  const Counter({
+    super.key,
+    required this.count,
+    required this.onIncrement,
+  });
+
+  // This method builds the widget tree for the Counter widget.
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        // Adding an ElevatedButton
+        // This button calls the onIncrement function when pressed and displays the text "Increment".
+        ElevatedButton(
+          onPressed: onIncrement,
+          child: const Text('Increment'),
+        ),
+        const SizedBox(width: 16),
+        // Displaying the count
+        // This line displays the current count.
+        Text('Count: $count'),
+      ],
+    );
+  }
+}
+
+// This class defines a stateful widget named ParentWidget.
+class ParentWidget extends StatefulWidget {
+  const ParentWidget({super.key});
+
+  // This method creates the state object for ParentWidget.
+  @override
+  State<ParentWidget> createState() => _ParentWidgetState();
+}
+
+// Defining the state class _ParentWidgetState
+class _ParentWidgetState extends State<ParentWidget> {
+  int _counter = 0;
+
+  // Incrementing the counter
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  // Building the widget tree for ParentWidget
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Counter(
+          count: _counter,
+          onIncrement: _incrementCounter,
+        ),
+      ),
+    );
+  }
+}
+
+// This function runs the app, setting ParentWidget as the home widget.
+void main() {
+  runApp(
+    const MaterialApp(home: ParentWidget()),
+  );
+}
